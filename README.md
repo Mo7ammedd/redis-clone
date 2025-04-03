@@ -6,23 +6,43 @@ A lightweight, in-memory Database implemented in C# that provides a subset of Re
 
 RedisClone is a .NET implementation of a Redis-like key-value store that supports various data types and operations. It's designed to be used as a local cache or for testing purposes where a full Redis instance isn't required.
 
+## Project Structure
+
+```
+RedisClone/
+├── src/
+│   ├── RedisClone.Core/           # Core interfaces and models
+│   ├── RedisClone.Infrastructure/ # Implementation of Redis operations
+│   └── RedisClone.API/           # REST API layer
+└── tests/
+    ├── RedisClone.UnitTests/     # Unit tests for individual components
+    └── RedisClone.IntegrationTests/ # Integration tests for the entire system
+```
+
 ## Features
 
 ### Data Types
-- **Strings**: Basic key-value storage
-- **Lists**: Ordered collections of strings
-- **Sets**: Unordered collections of unique strings
-- **Hashes**: Field-value pairs
+- **Strings**: Basic key-value storage with support for bit operations
+- **Lists**: Ordered collections of strings with operations on both ends
+- **Sets**: Unordered collections of unique strings with set operations
+- **Hashes**: Field-value pairs with atomic operations
 - **Sorted Sets**: Ordered collections of unique strings with associated scores
+- **Pub/Sub**: Publish/Subscribe messaging system
+- **Transactions**: Support for atomic operations
 
 ### Key Operations
-- `SetAsync`: Store a string value
+- `SetAsync`: Store a string value with optional expiration
 - `GetAsync`: Retrieve a string value
 - `DeleteAsync`: Remove a key
 - `ExistsAsync`: Check if a key exists
 - `TTLAsync`: Get time to live for a key
 - `SetExpirationAsync`: Set expiration time for a key
 - `RemoveExpirationAsync`: Remove expiration time from a key
+- `IncrementAsync`/`DecrementAsync`: Atomic counter operations
+- `AppendAsync`: Append to string value
+- `GetRangeAsync`/`SetRangeAsync`: String manipulation
+- `StrLenAsync`: Get string length
+- Bit operations: `SetBitAsync`, `GetBitAsync`, `BitCountAsync`, `BitOpAsync`, `BitPosAsync`
 
 ### List Operations
 - `LPushAsync`: Add elements to the head of a list
@@ -32,38 +52,63 @@ RedisClone is a .NET implementation of a Redis-like key-value store that support
 - `LRangeAsync`: Get a range of elements from a list
 - `LIndexAsync`: Get an element from a list by index
 - `LLenAsync`: Get the length of a list
+- `LSetAsync`: Set element at index
+- `LRemAsync`: Remove elements from list
+- `LTrimAsync`: Trim list to specified range
 
 ### Set Operations
 - `SAddAsync`: Add members to a set
 - `SRemAsync`: Remove members from a set
 - `SMembersAsync`: Get all members of a set
 - `SIsMemberAsync`: Check if a value is a member of a set
+- `SCardAsync`: Get set cardinality
+- `SPopAsync`: Remove and return random member
+- `SRandMemberAsync`: Get random member(s)
+- Set operations: `SInterStoreAsync`, `SUnionStoreAsync`, `SDiffStoreAsync`
 
 ### Hash Operations
 - `HSetAsync`: Set a hash field
 - `HGetAsync`: Get a hash field
 - `HGetAllAsync`: Get all fields and values in a hash
-- `HDelAsync`: Delete a hash field
+- `HDelAsync`: Delete hash field(s)
+- `HExistsAsync`: Check if field exists
+- `HIncrementByAsync`: Increment field value
+- `HKeysAsync`: Get all hash fields
+- `HLenAsync`: Get number of fields
+- `HValsAsync`: Get all hash values
 
 ### Sorted Set Operations
 - `ZAddAsync`: Add members to a sorted set
 - `ZRemAsync`: Remove members from a sorted set
-- `ZRangeAsync`: Get a range of members from a sorted set
-- `ZRevRangeAsync`: Get a range of members from a sorted set in reverse order
+- `ZScoreAsync`: Get member score
+- `ZIncrementByAsync`: Increment member score
+- `ZCardAsync`: Get set cardinality
+- `ZCountAsync`: Count members in score range
+- `ZRangeAsync`/`ZRevRangeAsync`: Get range of members
+- `ZRangeByScoreAsync`/`ZRevRangeByScoreAsync`: Get members by score range
+- `ZRankAsync`/`ZRevRankAsync`: Get member rank
+- `ZRemRangeByRankAsync`/`ZRemRangeByScoreAsync`: Remove members by rank/score
+- Set operations: `ZUnionStoreAsync`, `ZInterStoreAsync`
 
 ### Pub/Sub Operations
 - `PublishAsync`: Publish a message to a channel
 - `SubscribeAsync`: Subscribe to a channel
 - `UnsubscribeAsync`: Unsubscribe from a channel
 
+### Transaction Support
+- `BeginTransactionAsync`: Start a transaction
+- `CommitTransactionAsync`: Commit the transaction
+- `RollbackTransactionAsync`: Rollback the transaction
+
 ## Architecture
 
-The project is structured into several layers:
+The project follows a clean architecture pattern with clear separation of concerns:
 
 ### Core Layer (`RedisClone.Core`)
 - Contains interfaces and models
 - Defines the contract for Redis operations
 - Includes data models like `RedisValue` for storing different types of data
+- Provides the public API that users interact with
 
 ### Infrastructure Layer (`RedisClone.Infrastructure`)
 - Implements the core functionality
@@ -74,6 +119,13 @@ The project is structured into several layers:
   - `HashOperations`: Hash-specific operations
   - `SortedSetOperations`: Sorted set-specific operations
 - `RedisStore`: Main class that coordinates all operations
+- Uses `ConcurrentDictionary` for thread-safe storage
+- Implements proper locking mechanisms for atomic operations
+
+### API Layer (`RedisClone.API`)
+- Provides a REST API interface to the Redis functionality
+- Handles HTTP requests and responses
+- Maps API endpoints to Redis operations
 
 ## Thread Safety
 
@@ -81,6 +133,25 @@ RedisClone is designed to be thread-safe:
 - Uses `ConcurrentDictionary` for the main store
 - Implements proper locking mechanisms for operations
 - Handles concurrent access to shared resources
+- All operations are atomic where required
+- Uses async/await for non-blocking operations
+
+## Testing
+
+The project includes comprehensive testing:
+
+### Unit Tests
+- Tests individual components in isolation
+- Covers all data types and operations
+- Tests edge cases and error conditions
+- Verifies thread safety
+- Tests transaction behavior
+
+### Integration Tests
+- Tests the entire system working together
+- Verifies API endpoints
+- Tests real-world scenarios
+- Ensures proper interaction between components
 
 ## Usage
 
@@ -98,64 +169,66 @@ await redis.SetAsync("mykey", "myvalue");
 
 // Retrieve the value
 string? value = await redis.GetAsync("mykey");
-
-// Set with expiration
-await redis.SetAsync("tempkey", "tempvalue", TimeSpan.FromMinutes(5));
 ```
 
-### List Operations
+### List Operations Example
 
 ```csharp
 // Add items to a list
 await redis.RPushAsync("mylist", "item1", "item2", "item3");
 
-// Get list length
-var length = await redis.LLenAsync("mylist");
-
-// Get item at index
-var item = await redis.LIndexAsync("mylist", 1);
+// Get items from the list
+var items = await redis.LRangeAsync("mylist", 0, -1);
 ```
 
-### Set Operations
+### Hash Operations Example
 
 ```csharp
-// Add members to a set
-await redis.SAddAsync("myset", "member1", "member2");
+// Set hash fields
+await redis.HSetAsync("myhash", "field1", "value1");
+await redis.HSetAsync("myhash", "field2", "value2");
 
-// Check membership
-bool isMember = await redis.SIsMemberAsync("myset", "member1");
-
-// Get all members
-var members = await redis.SMembersAsync("myset");
+// Get all hash fields and values
+var hash = await redis.HGetAllAsync("myhash");
 ```
 
-## Testing
+### Sorted Set Example
 
-The project includes comprehensive unit tests covering:
-- Basic key-value operations
-- List operations
-- Set operations
-- Hash operations
-- Sorted set operations
-- Pub/Sub functionality
-- Expiration handling
+```csharp
+// Add items to a sorted set
+await redis.ZAddAsync("myset", ("member1", 1.0), ("member2", 2.0));
 
-Run tests using:
-```bash
-dotnet test
+// Get items in score range
+var items = await redis.ZRangeByScoreAsync("myset", 0, 2);
 ```
+
+### Pub/Sub Example
+
+```csharp
+// Subscribe to a channel
+await redis.SubscribeAsync("mychannel", async (message) => {
+    Console.WriteLine($"Received: {message}");
+});
+
+// Publish a message
+await redis.PublishAsync("mychannel", "Hello, Redis!");
+```
+
+## Performance Considerations
+
+- All operations are designed to be efficient
+- Uses in-memory storage for fast access
+- Implements proper locking to minimize contention
+- Supports atomic operations for consistency
+- Uses async/await for non-blocking operations
 
 ## Limitations
 
-- In-memory storage only (no persistence)
-- Single-instance only (no clustering)
-- Subset of Redis commands implemented
-- No support for Redis-specific features like:
-  - Lua scripting
-  - Streams
-  - Geo commands
-  - HyperLogLog
-  - Bit operations
+- Data is not persisted (in-memory only)
+- No replication support
+- Limited subset of Redis commands
+- No authentication/authorization
+- No clustering support
 
 ## Contributing
 
