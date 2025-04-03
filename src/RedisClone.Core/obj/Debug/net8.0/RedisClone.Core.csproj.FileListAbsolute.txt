@@ -1,0 +1,12 @@
+/mnt/mohammed/projects/redis/src/RedisClone.Core/bin/Debug/net8.0/RedisClone.Core.deps.json
+/mnt/mohammed/projects/redis/src/RedisClone.Core/bin/Debug/net8.0/RedisClone.Core.dll
+/mnt/mohammed/projects/redis/src/RedisClone.Core/bin/Debug/net8.0/RedisClone.Core.pdb
+/mnt/mohammed/projects/redis/src/RedisClone.Core/obj/Debug/net8.0/RedisClone.Core.csproj.AssemblyReference.cache
+/mnt/mohammed/projects/redis/src/RedisClone.Core/obj/Debug/net8.0/RedisClone.Core.GeneratedMSBuildEditorConfig.editorconfig
+/mnt/mohammed/projects/redis/src/RedisClone.Core/obj/Debug/net8.0/RedisClone.Core.AssemblyInfoInputs.cache
+/mnt/mohammed/projects/redis/src/RedisClone.Core/obj/Debug/net8.0/RedisClone.Core.AssemblyInfo.cs
+/mnt/mohammed/projects/redis/src/RedisClone.Core/obj/Debug/net8.0/RedisClone.Core.csproj.CoreCompileInputs.cache
+/mnt/mohammed/projects/redis/src/RedisClone.Core/obj/Debug/net8.0/RedisClone.Core.dll
+/mnt/mohammed/projects/redis/src/RedisClone.Core/obj/Debug/net8.0/refint/RedisClone.Core.dll
+/mnt/mohammed/projects/redis/src/RedisClone.Core/obj/Debug/net8.0/RedisClone.Core.pdb
+/mnt/mohammed/projects/redis/src/RedisClone.Core/obj/Debug/net8.0/ref/RedisClone.Core.dll

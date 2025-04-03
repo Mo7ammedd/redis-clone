@@ -1,0 +1,15 @@
+/mnt/mohammed/projects/redis/src/RedisClone.Infrastructure/obj/Debug/net8.0/RedisClone.Infrastructure.csproj.AssemblyReference.cache
+/mnt/mohammed/projects/redis/src/RedisClone.Infrastructure/obj/Debug/net8.0/RedisClone.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+/mnt/mohammed/projects/redis/src/RedisClone.Infrastructure/obj/Debug/net8.0/RedisClone.Infrastructure.AssemblyInfoInputs.cache
+/mnt/mohammed/projects/redis/src/RedisClone.Infrastructure/obj/Debug/net8.0/RedisClone.Infrastructure.AssemblyInfo.cs
+/mnt/mohammed/projects/redis/src/RedisClone.Infrastructure/obj/Debug/net8.0/RedisClone.Infrastructure.csproj.CoreCompileInputs.cache
+/mnt/mohammed/projects/redis/src/RedisClone.Infrastructure/bin/Debug/net8.0/RedisClone.Infrastructure.deps.json
+/mnt/mohammed/projects/redis/src/RedisClone.Infrastructure/bin/Debug/net8.0/RedisClone.Infrastructure.dll
+/mnt/mohammed/projects/redis/src/RedisClone.Infrastructure/bin/Debug/net8.0/RedisClone.Infrastructure.pdb
+/mnt/mohammed/projects/redis/src/RedisClone.Infrastructure/bin/Debug/net8.0/RedisClone.Core.dll
+/mnt/mohammed/projects/redis/src/RedisClone.Infrastructure/bin/Debug/net8.0/RedisClone.Core.pdb
+/mnt/mohammed/projects/redis/src/RedisClone.Infrastructure/obj/Debug/net8.0/RedisClo.5B0E7235.Up2Date
+/mnt/mohammed/projects/redis/src/RedisClone.Infrastructure/obj/Debug/net8.0/RedisClone.Infrastructure.dll
+/mnt/mohammed/projects/redis/src/RedisClone.Infrastructure/obj/Debug/net8.0/refint/RedisClone.Infrastructure.dll
+/mnt/mohammed/projects/redis/src/RedisClone.Infrastructure/obj/Debug/net8.0/RedisClone.Infrastructure.pdb
+/mnt/mohammed/projects/redis/src/RedisClone.Infrastructure/obj/Debug/net8.0/ref/RedisClone.Infrastructure.dll
