@@ -10,3 +10,4 @@
 /mnt/mohammed/projects/redis/src/RedisClone.Core/obj/Debug/net8.0/refint/RedisClone.Core.dll
 /mnt/mohammed/projects/redis/src/RedisClone.Core/obj/Debug/net8.0/RedisClone.Core.pdb
 /mnt/mohammed/projects/redis/src/RedisClone.Core/obj/Debug/net8.0/ref/RedisClone.Core.dll
+/mnt/mohammed/projects/redis/src/RedisClone.Core/obj/Debug/net8.0/RedisClone.Core.sourcelink.json

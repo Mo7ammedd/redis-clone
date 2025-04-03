@@ -1,47 +1,6 @@
 # RedisClone
 
-A high-performance, in-memory Redis clone implemented in C#. Perfect for local development, testing, and scenarios where a full Redis instance isn't needed. Built with clean architecture principles and thread-safe operations.
-
-[![.NET](https://img.shields.io/badge/.NET-8.0-blue.svg)](https://dotnet.microsoft.com/download/dotnet/8.0)
-[![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
-
-## 🚀 Features
-
-- **In-Memory Storage**: Lightning-fast operations with no disk I/O
-- **Thread-Safe**: Built for concurrent access with proper locking mechanisms
-- **Multiple Data Types**: 
-  - Strings
-  - Lists
-  - Sets
-  - Hashes
-  - Sorted Sets
-- **Key Expiration**: TTL support for automatic cleanup
-- **Pub/Sub**: Real-time messaging capabilities
-- **Clean Architecture**: Well-structured, maintainable codebase
-
-## 🎯 Use Cases
-
-- Local development environment
-- Unit testing
-- Caching layer
-- Prototyping
-- Learning Redis internals
-
-## 🛠️ Quick Start
-
-```csharp
-using RedisClone.Core;
-using RedisClone.Infrastructure;
-
-// Create a new Redis store
-IRedisStore redis = new RedisStore();
-
-// Store a value
-await redis.SetAsync("mykey", "myvalue");
-
-// Retrieve the value
-string? value = await redis.GetAsync("mykey");
-```
+A lightweight, in-memory Database implemented in C# that provides a subset of Redis functionality with a similar API.
 
 ## Overview
 

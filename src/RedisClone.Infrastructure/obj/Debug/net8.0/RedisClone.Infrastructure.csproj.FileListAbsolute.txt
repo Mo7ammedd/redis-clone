@@ -13,3 +13,4 @@
 /mnt/mohammed/projects/redis/src/RedisClone.Infrastructure/obj/Debug/net8.0/refint/RedisClone.Infrastructure.dll
 /mnt/mohammed/projects/redis/src/RedisClone.Infrastructure/obj/Debug/net8.0/RedisClone.Infrastructure.pdb
 /mnt/mohammed/projects/redis/src/RedisClone.Infrastructure/obj/Debug/net8.0/ref/RedisClone.Infrastructure.dll
+/mnt/mohammed/projects/redis/src/RedisClone.Infrastructure/obj/Debug/net8.0/RedisClone.Infrastructure.sourcelink.json

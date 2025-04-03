@@ -102,3 +102,4 @@
 /mnt/mohammed/projects/redis/tests/RedisClone.UnitTests/obj/Debug/net8.0/RedisClone.UnitTests.pdb
 /mnt/mohammed/projects/redis/tests/RedisClone.UnitTests/obj/Debug/net8.0/RedisClone.UnitTests.genruntimeconfig.cache
 /mnt/mohammed/projects/redis/tests/RedisClone.UnitTests/obj/Debug/net8.0/ref/RedisClone.UnitTests.dll
+/mnt/mohammed/projects/redis/tests/RedisClone.UnitTests/obj/Debug/net8.0/RedisClone.UnitTests.sourcelink.json
